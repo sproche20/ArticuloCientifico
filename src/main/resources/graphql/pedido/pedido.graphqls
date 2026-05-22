@@ -1,0 +1,23 @@
+type Pedido {
+  id: ID
+  clienteId: ID
+  productosIds: [ID]
+  total: Float
+  estado: String
+  fechaPedido: String
+}
+
+input PedidoInput {
+  clienteId: ID!
+  productosIds: [ID!]!
+  estado: String!
+}
+
+extend type Query {
+  listarPedidos: [Pedido]
+  obtenerPedidoPorId(id: ID!): Pedido
+}
+
+extend type Mutation {
+  crearPedido(input: PedidoInput!): Pedido
+}

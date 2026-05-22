@@ -1,0 +1,27 @@
+# Definición del objeto Producto
+type Producto {
+  id: ID
+  nombre: String
+  descripcion: String
+  precio: Float
+  stock: Int
+  activo: Boolean
+}
+
+# Objeto de entrada para crear un producto
+input ProductoInput {
+  nombre: String!
+  descripcion: String
+  precio: Float!
+  stock: Int!
+  activo: Boolean!
+}
+
+extend type Query {
+  listarProductos: [Producto]
+  obtenerProductoPorId(id: ID!): Producto
+}
+
+extend type Mutation {
+  crearProducto(input: ProductoInput!): Producto
+}

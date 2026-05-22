@@ -26,12 +26,12 @@ public class ClienteOutAdapter implements ClienteOutPort {
 
     @Override
     public Optional<Cliente> findById(Long id) {
-        return repository.findById(id).map(mapper::toDomain);
+        return repository.findByIdWithPedidos(id).map(mapper::toDomain);
     }
 
     @Override
     public List<Cliente> findAll() {
-        return repository.findAll().stream()
+        return repository.findAllWithPedidos().stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }

@@ -2,6 +2,7 @@ package com.article.restgraphqlmigration.cliente.infrastructure.adapters.in.grap
 
 import com.article.restgraphqlmigration.cliente.domain.model.Cliente;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 /**
  * En GraphQL, este record representará el "Input Type" definido en el esquema.
@@ -16,6 +17,6 @@ public record ClienteGraphQLRequest(
 
     public Cliente toDomain() {
         return new Cliente(
-                null, nombres, apellidos, correo, telefono, direccion, activo, LocalDateTime.now());
+                null, nombres, apellidos, correo, telefono, direccion, activo, LocalDateTime.now(), Collections.emptyList());
     }
 }

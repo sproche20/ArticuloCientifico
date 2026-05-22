@@ -1,0 +1,24 @@
+type DetallePedido {
+  id: ID
+  pedidoId: ID
+  productoId: ID
+  cantidad: Int
+  precioUnitario: Float
+  subtotal: Float
+}
+
+input DetallePedidoInput {
+  pedidoId: ID!
+  productoId: ID!
+  cantidad: Int!
+  precioUnitario: Float!
+}
+
+extend type Query {
+  listarDetallesPedido: [DetallePedido]
+  obtenerDetallePedidoPorId(id: ID!): DetallePedido
+}
+
+extend type Mutation {
+  crearDetallePedido(input: DetallePedidoInput!): DetallePedido
+}

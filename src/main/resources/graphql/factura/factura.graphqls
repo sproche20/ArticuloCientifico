@@ -1,0 +1,22 @@
+type Factura {
+  id: ID
+  pedidoId: ID
+  numeroFactura: String
+  subtotal: Float
+  total: Float
+  fechaEmision: String
+}
+
+input FacturaInput {
+  pedidoId: ID!
+  numeroFactura: String!
+}
+
+extend type Query {
+  listarFacturas: [Factura]
+  obtenerFacturaPorId(id: ID!): Factura
+}
+
+extend type Mutation {
+  crearFactura(input: FacturaInput!): Factura
+}

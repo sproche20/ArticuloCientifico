@@ -1,0 +1,30 @@
+# Definición del objeto Cliente
+type Cliente {
+  id: ID
+  nombres: String
+  apellidos: String
+  correo: String
+  telefono: String
+  direccion: String
+  activo: Boolean
+  fechaRegistro: String
+}
+
+# Objeto de entrada para crear un cliente
+input ClienteInput {
+  nombres: String!
+  apellidos: String!
+  correo: String!
+  telefono: String
+  direccion: String
+  activo: Boolean!
+}
+
+extend type Query {
+  listarClientes: [Cliente]
+  obtenerClientePorId(id: ID!): Cliente
+}
+
+extend type Mutation {
+  crearCliente(input: ClienteInput!): Cliente
+}

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 public record ClienteRestRequest(
         @NotBlank(message = "Los nombres son obligatorios") String nombres,
@@ -23,7 +24,8 @@ public record ClienteRestRequest(
                 telefono,
                 direccion,
                 activo,
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                Collections.emptyList());
     }
 
     public Cliente toDomainWithId(Long id) {
@@ -35,7 +37,7 @@ public record ClienteRestRequest(
                 telefono,
                 direccion,
                 activo,
-                null // La fecha usualmente no se actualiza por el cliente
-        );
+                null, // La fecha usualmente no se actualiza por el cliente
+                Collections.emptyList());
     }
 }
