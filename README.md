@@ -41,6 +41,7 @@ Para validar la eficiencia de GraphQL frente a REST en términos de *Over-fetchi
 *   **Clientes:** `POST /api/rest/clientes/generar?cantidad=50000`
 *   **Productos:** `POST /api/rest/productos/generar?cantidad=10000`
 *   **Pedidos:** `POST /api/rest/pedidos/generar?cantidad=200000&maxClienteId=50000`
+*   *   **Facturas:** `POST /api/rest/facturas/generar?cantidad=100000&maxPedidoId=200000`
 *   **Detalles:** `POST /api/rest/detalles-pedido/generar?cantidad=500000&maxPedidoId=200000&maxProductoId=10000`
 
 ## 🧪 Pruebas de Rendimiento con k6
