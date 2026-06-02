@@ -12,4 +12,6 @@ public interface FacturaOutPort {
     List<Factura> findAll();
 
     boolean deleteById(Long id);
+
+    void saveAll(List<Factura> facturas);
 }

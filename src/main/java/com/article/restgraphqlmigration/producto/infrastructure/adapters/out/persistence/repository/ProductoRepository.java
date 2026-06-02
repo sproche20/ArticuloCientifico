@@ -15,4 +15,7 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
 
     @Query("SELECT p FROM ProductoEntity p LEFT JOIN FETCH p.detalles")
     List<ProductoEntity> findAllWithDetalles();
+
+    @Query("SELECT p.id FROM ProductoEntity p")
+    List<Long> findAllIds();
 }

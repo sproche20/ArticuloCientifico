@@ -13,5 +13,7 @@ public interface DetallePedidoOutPort {
 
     boolean deleteById(Long id);
 
+    void saveAll(List<DetallePedido> detalles);
+
     List<DetallePedido> findByPedidoId(Long pedidoId);
 }

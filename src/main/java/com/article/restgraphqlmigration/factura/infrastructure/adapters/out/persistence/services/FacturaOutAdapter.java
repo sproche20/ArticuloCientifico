@@ -44,4 +44,13 @@ public class FacturaOutAdapter implements FacturaOutPort {
         }
         return false;
     }
+
+    @Override
+    public void saveAll(List<Factura> facturas) {
+        List<FacturaEntity> entities = facturas.stream()
+                .map(mapper::toEntity)
+                .toList();
+
+        repository.saveAll(entities);
+    }
 }

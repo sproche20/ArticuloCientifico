@@ -12,4 +12,8 @@ public interface PedidoOutPort {
     List<Pedido> findAll();
 
     boolean deleteById(Long id);
+
+    void saveAll(List<Pedido> pedidos);
+
+    List<Long> findAllIds();
 }

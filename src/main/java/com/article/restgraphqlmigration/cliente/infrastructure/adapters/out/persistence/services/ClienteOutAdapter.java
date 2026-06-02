@@ -44,4 +44,13 @@ public class ClienteOutAdapter implements ClienteOutPort {
         }
         return false;
     }
+
+    @Override
+    public void saveAll(List<Cliente> clientes) {
+        List<ClienteEntity> entities = clientes.stream()
+                .map(mapper::toEntity)
+                .toList();
+
+        repository.saveAll(entities);
+    }
 }

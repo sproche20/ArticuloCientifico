@@ -12,4 +12,6 @@ public interface ClienteOutPort {
     List<Cliente> findAll();
 
     boolean deleteById(Long id);
+
+    void saveAll(List<Cliente> clientes);
 }

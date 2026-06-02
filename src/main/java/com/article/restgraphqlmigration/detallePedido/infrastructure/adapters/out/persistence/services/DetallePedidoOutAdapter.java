@@ -46,6 +46,15 @@ public class DetallePedidoOutAdapter implements DetallePedidoOutPort {
     }
 
     @Override
+    public void saveAll(List<DetallePedido> detalles) {
+        List<DetallePedidoEntity> entities = detalles.stream()
+                .map(mapper::toEntity)
+                .toList();
+
+        repository.saveAll(entities);
+    }
+
+    @Override
     public List<DetallePedido> findByPedidoId(Long pedidoId) {
         return repository.findByPedidoId(pedidoId).stream().map(mapper::toDomain).collect(Collectors.toList());
     }

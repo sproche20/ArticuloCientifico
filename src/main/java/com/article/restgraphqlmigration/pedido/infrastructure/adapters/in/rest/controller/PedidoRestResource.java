@@ -3,9 +3,11 @@ package com.article.restgraphqlmigration.pedido.infrastructure.adapters.in.rest.
 import com.article.restgraphqlmigration.pedido.domain.model.Pedido;
 import com.article.restgraphqlmigration.pedido.domain.ports.in.PedidoInPort;
 import com.article.restgraphqlmigration.pedido.infrastructure.adapters.in.rest.Dto.PedidoRestRequest;
+import com.article.restgraphqlmigration.pedido.application.usecase.PedidoDatasetUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class PedidoRestResource {
 
     private final PedidoInPort pedidoInPort;
+    private final PedidoDatasetUseCase pedidoDatasetUseCase;
 
     @GetMapping
     public List<Pedido> getAll() {
@@ -42,5 +45,13 @@ public class PedidoRestResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         pedidoInPort.deletePedido(id);
+    }
+
+    @PostMapping("/generar")
+    public ResponseEntity<String> generar(
+            @RequestParam int cantidad,
+            @RequestParam int maxClienteId) {
+        pedidoDatasetUseCase.generarPedidosMasivos(cantidad, maxClienteId);
+        return ResponseEntity.ok(cantidad + " pedidos generados exitosamente.");
     }
 }

@@ -2,10 +2,12 @@ package com.article.restgraphqlmigration.factura.infrastructure.adapters.in.rest
 
 import com.article.restgraphqlmigration.factura.domain.model.Factura;
 import com.article.restgraphqlmigration.factura.domain.ports.in.FacturaInPort;
+import com.article.restgraphqlmigration.factura.application.usecase.FacturaDatasetUseCase;
 import com.article.restgraphqlmigration.factura.infrastructure.adapters.in.rest.Dto.FacturaRestRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class FacturaRestResource {
 
     private final FacturaInPort facturaInPort;
+    private final FacturaDatasetUseCase facturaDatasetUseCase;
 
     @GetMapping
     public List<Factura> getAll() {
@@ -36,5 +39,13 @@ public class FacturaRestResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         facturaInPort.deleteFactura(id);
+    }
+
+    @PostMapping("/generar")
+    public ResponseEntity<String> generar(
+            @RequestParam int cantidad,
+            @RequestParam int maxPedidoId) {
+        facturaDatasetUseCase.generarFacturasMasivas(cantidad, maxPedidoId);
+        return ResponseEntity.ok(cantidad + " facturas generadas exitosamente.");
     }
 }

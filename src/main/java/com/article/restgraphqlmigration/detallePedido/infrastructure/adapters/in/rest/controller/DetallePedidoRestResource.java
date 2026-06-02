@@ -3,9 +3,11 @@ package com.article.restgraphqlmigration.detallePedido.infrastructure.adapters.i
 import com.article.restgraphqlmigration.detallePedido.domain.model.DetallePedido;
 import com.article.restgraphqlmigration.detallePedido.domain.ports.in.DetallePedidoInPort;
 import com.article.restgraphqlmigration.detallePedido.infrastructure.adapters.in.rest.Dto.DetallePedidoRestRequest;
+import com.article.restgraphqlmigration.detallePedido.application.usecase.DetallePedidoDatasetUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class DetallePedidoRestResource {
 
     private final DetallePedidoInPort detallePedidoInPort;
+    private final DetallePedidoDatasetUseCase detallePedidoDatasetUseCase;
 
     @GetMapping
     public List<DetallePedido> getAll() {
@@ -36,5 +39,14 @@ public class DetallePedidoRestResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         detallePedidoInPort.deleteDetallePedido(id);
+    }
+
+    @PostMapping("/generar")
+    public ResponseEntity<String> generar(
+            @RequestParam int cantidad,
+            @RequestParam int maxPedidoId,
+            @RequestParam int maxProductoId) {
+        detallePedidoDatasetUseCase.generarDetallesMasivos(cantidad, maxPedidoId, maxProductoId);
+        return ResponseEntity.ok(cantidad + " detalles generados exitosamente.");
     }
 }

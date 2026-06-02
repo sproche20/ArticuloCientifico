@@ -44,4 +44,18 @@ public class PedidoOutAdapter implements PedidoOutPort {
         }
         return false;
     }
+
+    @Override
+    public void saveAll(List<Pedido> pedidos) {
+        List<PedidoEntity> entities = pedidos.stream()
+                .map(mapper::toEntity)
+                .toList();
+
+        repository.saveAll(entities);
+    }
+
+    @Override
+    public List<Long> findAllIds() {
+        return repository.findAllIds();
+    }
 }

@@ -3,9 +3,11 @@ package com.article.restgraphqlmigration.producto.infrastructure.adapters.in.res
 import com.article.restgraphqlmigration.producto.domain.model.Producto;
 import com.article.restgraphqlmigration.producto.domain.ports.in.ProductoInPort;
 import com.article.restgraphqlmigration.producto.infrastructure.adapters.in.rest.Dto.ProductoRestRequest;
+import com.article.restgraphqlmigration.producto.application.usecase.ProductoDatasetUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class ProductoRestResource {
 
     private final ProductoInPort productoInPort;
+    private final ProductoDatasetUseCase productoDatasetUseCase;
 
     @GetMapping
     public List<Producto> getAll() {
@@ -42,5 +45,15 @@ public class ProductoRestResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         productoInPort.deleteProducto(id);
+    }
+
+    @PostMapping("/generar")
+    public ResponseEntity<String> generar(
+            @RequestParam int cantidad) {
+
+        productoDatasetUseCase.generarProductos(cantidad);
+
+        return ResponseEntity.ok(
+                cantidad + " productos generados");
     }
 }

@@ -31,3 +31,26 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# IDE-specific files
+*.swp
+*~
+
+# Docker
+.dockerignore
+
+# k6 results
+*.json
+*.html
+
+# Database files
+*.mv.db
+*.trace.db

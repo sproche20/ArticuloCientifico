@@ -44,4 +44,14 @@ public class ProductoOutAdapter implements ProductoOutPort {
         }
         return false;
     }
+
+    @Override
+    public void saveAll(List<Producto> productos) {
+
+        List<ProductoEntity> entities = productos.stream()
+                .map(mapper::toEntity)
+                .toList();
+
+        repository.saveAll(entities);
+    }
 }

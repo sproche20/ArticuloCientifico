@@ -7,6 +7,8 @@ import java.util.Optional;
 public interface ProductoOutPort {
     Producto save(Producto producto);
 
+    void saveAll(List<Producto> productos);
+
     Optional<Producto> findById(Long id);
 
     List<Producto> findAll();

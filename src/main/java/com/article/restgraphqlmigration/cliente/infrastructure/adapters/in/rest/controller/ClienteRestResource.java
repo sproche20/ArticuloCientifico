@@ -7,8 +7,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.article.restgraphqlmigration.cliente.application.usecase.ClienteDatasetUseCase;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/rest/clientes")
@@ -16,6 +21,7 @@ import java.util.List;
 public class ClienteRestResource {
 
     private final ClienteInPort clienteInPort;
+    private final ClienteDatasetUseCase clienteDatasetUseCase;
 
     @GetMapping
     public List<Cliente> getAll() {
@@ -43,4 +49,15 @@ public class ClienteRestResource {
     public void delete(@PathVariable Long id) {
         clienteInPort.deleteCliente(id);
     }
+
+    @PostMapping("/generar")
+    public ResponseEntity<String> generar(
+            @RequestParam int cantidad) {
+
+        clienteDatasetUseCase.generarClientes(cantidad);
+
+        return ResponseEntity.ok(
+                cantidad + " clientes generados");
+    }
+
 }

@@ -15,4 +15,7 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 
     @Query("SELECT p FROM PedidoEntity p LEFT JOIN FETCH p.cliente LEFT JOIN FETCH p.detalles dp LEFT JOIN FETCH dp.producto LEFT JOIN FETCH p.factura")
     List<PedidoEntity> findAllWithRelations();
+
+    @Query("SELECT p.id FROM PedidoEntity p")
+    List<Long> findAllIds();
 }
