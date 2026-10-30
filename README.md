@@ -65,4 +65,5 @@ El experimento busca evidenciar cómo GraphQL reduce el tamaño de los paquetes 
 
 ---
 *Este proyecto forma parte de una investigación académica sobre arquitecturas evolutivas.*
-Enlace Articulo Cientifico:https://editorialscientificfuture.com/index.php/riif/article/view/256
+
+*Enlace Articulo Cientifico:https://editorialscientificfuture.com/index.php/riif/article/view/256*
